@@ -16,7 +16,6 @@ export const App: React.FC = () => {
   // Global physical keyboard hotkeys listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore when focused on an input element
       const target = e.target as HTMLElement;
       if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
         return;
@@ -42,7 +41,7 @@ export const App: React.FC = () => {
   }, [triggerPhoneAction]);
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-[#FF4500]/30 selection:text-white bg-noise">
+    <div className="min-h-screen bg-black text-white selection:bg-zinc-800 selection:text-white">
       <Navbar />
       <main>
         <Hero onKeyboardAction={triggerPhoneAction} externalTrigger={externalTrigger} />
