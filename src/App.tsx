@@ -1,14 +1,9 @@
 import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { MetricsBar } from './components/MetricsBar';
-import { BentoFeatures } from './components/BentoFeatures';
-import { GestureShowcase } from './components/GestureShowcase';
-import { ComparisonTable } from './components/ComparisonTable';
-import { InstallHub } from './components/InstallHub';
-import { TechSpecs } from './components/TechSpecs';
-import { FAQ } from './components/FAQ';
-import { Footer } from './components/Footer';
+import { FeaturesSimple } from './components/FeaturesSimple';
+import { InstallSimple } from './components/InstallSimple';
+import { FooterSimple } from './components/FooterSimple';
 
 export const App: React.FC = () => {
   return (
@@ -16,15 +11,10 @@ export const App: React.FC = () => {
       <Navbar />
       <main>
         <Hero />
-        <MetricsBar />
-        <BentoFeatures />
-        <GestureShowcase />
-        <ComparisonTable />
-        <InstallHub />
-        <TechSpecs />
-        <FAQ />
+        <FeaturesSimple />
+        <InstallSimple />
       </main>
-      <Footer />
+      <FooterSimple />
     </div>
   );
 };
