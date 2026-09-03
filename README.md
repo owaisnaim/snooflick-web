@@ -10,7 +10,7 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[📱 **Main App Repository: owaisnaim/snooflick**](https://github.com/owaisnaim/snooflick) • [🚀 **Live Website**](https://owaisnaim.github.io/snooflick-web/)
+[📱 **Main App Repository: owaisnaim/snooflick**](https://github.com/owaisnaim/snooflick) • [🚀 **Live Website: snooflick.com**](https://snooflick.com)
 
 </div>
 
@@ -29,10 +29,10 @@
 - **🖐️ Ergonomic Thumb Gesture Showcase**: Visual matrix illustrating vertical flick snap, hold to accelerate, double tap to like, left-edge swipe back, and progress scrubber seeking.
 - **📊 Detailed Comparison Matrix**: Transparent side-by-side comparison between SnooFlick, the official Reddit mobile app, and TikTok/Reels.
 - **📲 Multi-Platform Installation Hub**:
-  - Web App (PWA) 1-click launch
+  - Web App (PWA) direct access on `snooflick.com`
   - iOS Safari "Add to Home Screen" 3-step visual guide
   - Android native APK download button
-  - Desktop-to-mobile **Scan QR Code** generator
+  - Desktop-to-mobile **Scan QR Code** generator (encodes `https://snooflick.com`)
 - **🏗️ Architecture Whitepapers & Developer Specs**: Highlighting Vite vendor chunking (109 kB core bundle, -87% size reduction), range pre-buffering (512 KB chunks), and zero-login OAuth.
 - **💬 Interactive FAQ Accordion**: Addresses common questions regarding Reddit guest OAuth tokens, audio synchronization, privacy, and data usage.
 
@@ -44,7 +44,7 @@
 - **Bundler**: Vite 5
 - **Styling**: Tailwind CSS v3, Custom Apple Optical Liquid Glass tokens
 - **Icons**: Lucide React
-- **Deployment**: GitHub Pages (via automated GitHub Actions) & Vercel (`vercel.json`)
+- **Deployment**: Vercel (`vercel.json`) on custom domain **`snooflick.com`**
 
 ---
 
@@ -67,25 +67,17 @@ The site will be available at `http://localhost:5173/`.
 npm run build
 ```
 
-The static output is generated in the `dist/` directory, ready to be hosted on GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
+The static output is generated in the `dist/` directory, ready to be deployed to Vercel.
 
 ---
 
-## ☁️ Deployment
+## ☁️ Deployment on Vercel
 
-### GitHub Pages (Automated)
-This repository includes a pre-configured GitHub Actions workflow at `.github/workflows/deploy.yml`. 
-To enable:
-1. Go to repository **Settings** &rarr; **Pages**.
-2. Under **Build and deployment** &rarr; **Source**, select **GitHub Actions**.
-3. Push to `main` branch to trigger automated deployment!
-
-### Vercel
 Deploy with 1-click on Vercel:
 ```bash
 npx vercel
 ```
-Or connect the repository on the [Vercel Dashboard](https://vercel.com). The included `vercel.json` ensures all routes and static assets resolve seamlessly.
+Or import the repository on the [Vercel Dashboard](https://vercel.com) and assign the domain **`snooflick.com`**. The included `vercel.json` ensures all routes, asset caching headers, and SPA pushState rewrites work automatically.
 
 ---
 

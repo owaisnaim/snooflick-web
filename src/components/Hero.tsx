@@ -1,12 +1,8 @@
 import React from 'react';
-import { Download, ArrowRight, ShieldCheck, Zap, Volume2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Zap, Volume2, Sparkles } from 'lucide-react';
 import { PhoneMockup } from './PhoneMockup';
 
-interface HeroProps {
-  appUrl: string;
-}
-
-export const Hero: React.FC<HeroProps> = ({ appUrl }) => {
+export const Hero: React.FC = () => {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden radial-glow-cone">
       {/* Ambient background glow dots */}
@@ -43,21 +39,19 @@ export const Hero: React.FC<HeroProps> = ({ appUrl }) => {
             {/* Call to Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <a
-                href={appUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#install"
                 className="w-full sm:w-auto px-8 py-4 rounded-2xl apple-glass-button-primary text-white font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-orange-500/30 group"
               >
-                <span>Launch Web App</span>
+                <span>Get SnooFlick</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
 
               <a
-                href="#install"
+                href="#demo"
                 className="w-full sm:w-auto px-7 py-4 rounded-2xl apple-glass-button-secondary text-white font-semibold text-base flex items-center justify-center gap-2.5"
               >
-                <Download className="w-5 h-5 text-white/70" />
-                <span>Get App (APK / iOS)</span>
+                <Sparkles className="w-5 h-5 text-amber-400" />
+                <span>Try Live Demo</span>
               </a>
             </div>
 
