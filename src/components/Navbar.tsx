@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, ExternalLink, Smartphone } from 'lucide-react';
+import { Menu, X, Github, Smartphone, ArrowRight } from 'lucide-react';
 
-interface NavbarProps {
-  appUrl: string;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ appUrl }) => {
+export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -40,7 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ appUrl }) => {
           <a href="#" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg p-[1px] bg-gradient-to-tr from-[#FF4500] via-[#FF1493] to-[#00F2FE] group-hover:scale-105 transition-transform">
               <img
-                src="./logo.png"
+                src="/logo.png"
                 alt="SnooFlick Logo"
                 className="w-full h-full object-cover rounded-[11px] bg-black"
                 onError={(e) => {
@@ -84,29 +80,25 @@ export const Navbar: React.FC<NavbarProps> = ({ appUrl }) => {
             </a>
 
             <a
-              href={appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#install"
               className="flex items-center gap-2 text-sm font-semibold text-white px-4 py-2 rounded-xl apple-glass-button-primary shadow-lg shadow-orange-500/25 transition-all group"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
               </span>
-              <span>Launch App</span>
-              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <span>Get App</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
             <a
-              href={appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#install"
               className="text-xs font-semibold px-3 py-1.5 rounded-lg apple-glass-button-primary"
             >
-              Launch
+              Get App
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -145,13 +137,12 @@ export const Navbar: React.FC<NavbarProps> = ({ appUrl }) => {
               <span>View Source on GitHub</span>
             </a>
             <a
-              href={appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#install"
+              onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 text-sm font-bold py-3 rounded-xl apple-glass-button-primary text-white"
             >
               <Smartphone className="w-4 h-4" />
-              <span>Launch SnooFlick Web App</span>
+              <span>Install SnooFlick</span>
             </a>
           </div>
         </div>

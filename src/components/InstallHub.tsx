@@ -12,12 +12,8 @@ import {
   ExternalLink
 } from 'lucide-react';
 
-interface InstallHubProps {
-  appUrl: string;
-}
-
-export const InstallHub: React.FC<InstallHubProps> = ({ appUrl }) => {
-  // Direct APK link from GitHub releases
+export const InstallHub: React.FC = () => {
+  const siteUrl = 'https://snooflick.com';
   const apkReleaseUrl = 'https://github.com/owaisnaim/snooflick/releases';
 
   return (
@@ -75,12 +71,10 @@ export const InstallHub: React.FC<InstallHubProps> = ({ appUrl }) => {
             </div>
 
             <a
-              href={appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={siteUrl}
               className="mt-8 w-full py-3.5 px-4 rounded-xl apple-glass-button-primary text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20"
             >
-              <span>Launch Web App</span>
+              <span>Open snooflick.com</span>
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
@@ -107,7 +101,7 @@ export const InstallHub: React.FC<InstallHubProps> = ({ appUrl }) => {
                   <span className="w-5 h-5 rounded-full bg-white/10 text-white font-bold flex items-center justify-center text-[10px]">
                     1
                   </span>
-                  <span className="text-white/80">Open SnooFlick in <strong>Safari</strong></span>
+                  <span className="text-white/80">Open <strong>snooflick.com</strong> in Safari</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <span className="w-5 h-5 rounded-full bg-white/10 text-white font-bold flex items-center justify-center text-[10px]">
@@ -129,9 +123,7 @@ export const InstallHub: React.FC<InstallHubProps> = ({ appUrl }) => {
             </div>
 
             <a
-              href={appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={siteUrl}
               className="mt-8 w-full py-3.5 px-4 rounded-xl apple-glass-button-secondary text-white font-semibold text-sm flex items-center justify-center gap-2"
             >
               <span>Open in Safari</span>
@@ -196,27 +188,26 @@ export const InstallHub: React.FC<InstallHubProps> = ({ appUrl }) => {
               <span className="text-gradient-fiery">Scan to Launch on Your Phone.</span>
             </h3>
             <p className="text-sm text-white/70 leading-relaxed">
-              Point your iOS or Android camera at the QR code to open SnooFlick directly on your mobile device with zero friction.
+              Point your iOS or Android camera at the QR code to open SnooFlick directly on your mobile device at snooflick.com.
             </p>
           </div>
 
           {/* QR Code Container with SnooFlick Logo in center */}
           <div className="p-4 rounded-2xl bg-white p-3 shadow-2xl flex flex-col items-center flex-shrink-0">
             <div className="relative w-36 h-36 flex items-center justify-center">
-              {/* High-res QR code image with fallback to vector */}
               <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(
-                  appUrl
+                  siteUrl
                 )}&color=000000&bgcolor=ffffff`}
-                alt="Scan to open SnooFlick on mobile"
+                alt="Scan to open snooflick.com on mobile"
                 className="w-36 h-36 object-contain rounded-lg"
               />
               <div className="absolute w-8 h-8 rounded-lg overflow-hidden p-0.5 bg-black shadow-md border border-white">
-                <img src="./favicon.png" alt="Snoo" className="w-full h-full object-cover" />
+                <img src="/favicon.png" alt="Snoo" className="w-full h-full object-cover" />
               </div>
             </div>
             <span className="text-[10px] font-bold text-zinc-900 mt-2">
-              Scan with Camera
+              Scan for snooflick.com
             </span>
           </div>
         </div>
