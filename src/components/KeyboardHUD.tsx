@@ -7,17 +7,17 @@ interface KeyboardHUDProps {
 
 export const KeyboardHUD: React.FC<KeyboardHUDProps> = ({ onTrigger }) => {
   const hotkeys = [
-    { key: 'Space', label: 'Play / Pause', action: 'togglePlay', icon: Play },
-    { key: 'J', label: 'Next Video', action: 'nextClip', icon: SkipForward },
-    { key: 'K', label: 'Prev Video', action: 'prevClip', icon: SkipBack },
-    { key: 'M', label: 'Mute / Sound', action: 'toggleMute', icon: Volume2 },
-    { key: 'Hold', label: '2.0X Speed', action: 'speedHold', icon: Zap },
+    { key: 'Space', label: 'Play', action: 'togglePlay', icon: Play },
+    { key: 'J', label: 'Next', action: 'nextClip', icon: SkipForward },
+    { key: 'K', label: 'Prev', action: 'prevClip', icon: SkipBack },
+    { key: 'M', label: 'Mute', action: 'toggleMute', icon: Volume2 },
+    { key: 'Hold', label: '2.0X', action: 'speedHold', icon: Zap },
   ];
 
   return (
-    <div className="inline-flex items-center gap-2 p-2 rounded-2xl apple-glass-card border border-white/10 shadow-2xl backdrop-blur-2xl">
-      <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 border-r border-white/10 text-[11px] font-bold text-white/50 uppercase tracking-wider">
-        <span>Desktop Keys</span>
+    <div className="inline-flex items-center gap-2 p-1.5 rounded-xl border border-zinc-800 bg-zinc-950">
+      <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+        <span>Hotkeys</span>
       </div>
 
       <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
@@ -27,16 +27,16 @@ export const KeyboardHUD: React.FC<KeyboardHUDProps> = ({ onTrigger }) => {
             <button
               key={hk.key}
               onClick={() => onTrigger(hk.action)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl tactile-keycap text-white hover:text-white transition-all group"
-              title={`Press ${hk.key} to ${hk.label}`}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded tactile-keycap text-zinc-300 hover:text-white transition-colors"
+              title={`Press ${hk.key} for ${hk.label}`}
             >
-              <kbd className="text-[11px] text-orange-400 group-hover:text-amber-300 font-mono">
+              <kbd className="text-[11px] text-zinc-400 font-mono font-bold">
                 {hk.key}
               </kbd>
-              <span className="hidden md:inline text-[11px] font-medium text-white/70">
+              <span className="hidden md:inline text-[11px] text-zinc-400">
                 {hk.label}
               </span>
-              <Icon className="w-3 h-3 text-white/40 group-hover:text-white/80 hidden sm:inline" />
+              <Icon className="w-3 h-3 text-zinc-500 hidden sm:inline" />
             </button>
           );
         })}
