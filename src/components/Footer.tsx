@@ -1,11 +1,7 @@
 import React from 'react';
 import { Github, ArrowRight, Heart, Sparkles } from 'lucide-react';
 
-interface FooterProps {
-  appUrl: string;
-}
-
-export const Footer: React.FC<FooterProps> = ({ appUrl }) => {
+export const Footer: React.FC = () => {
   return (
     <footer className="relative border-t border-white/10 bg-black pt-20 pb-12 overflow-hidden">
       {/* Ambient background glow */}
@@ -26,17 +22,15 @@ export const Footer: React.FC<FooterProps> = ({ appUrl }) => {
             </h3>
             
             <p className="text-sm sm:text-base text-white/70 leading-relaxed">
-              No registration. No fees. No algorithmic tracking. Just pure vertical video flow.
+              No registration. No fees. No algorithmic tracking. Just pure vertical video flow on snooflick.com.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <a
-                href={appUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#install"
                 className="w-full sm:w-auto px-8 py-4 rounded-2xl apple-glass-button-primary text-white font-bold text-base flex items-center justify-center gap-2 shadow-xl shadow-orange-500/30 group"
               >
-                <span>Launch SnooFlick Web App</span>
+                <span>Get SnooFlick Now</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
@@ -60,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({ appUrl }) => {
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl overflow-hidden shadow-md p-[1px] bg-gradient-to-tr from-[#FF4500] to-[#FF1493]">
-                <img src="./logo.png" alt="SnooFlick Logo" className="w-full h-full object-cover rounded-[10px] bg-black" />
+                <img src="/logo.png" alt="SnooFlick Logo" className="w-full h-full object-cover rounded-[10px] bg-black" />
               </div>
               <span className="font-extrabold text-xl tracking-tight text-white">
                 Snoo<span className="text-[#FF4500]">Flick</span>
@@ -121,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ appUrl }) => {
         {/* Copyright & Disclaimer */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50 text-center md:text-left">
           <p>
-            © {new Date().getFullYear()} SnooFlick. Created with <Heart className="w-3 h-3 text-rose-500 inline fill-current" /> by{' '}
+            © {new Date().getFullYear()} SnooFlick (snooflick.com). Created with <Heart className="w-3 h-3 text-rose-500 inline fill-current" /> by{' '}
             <a href="https://github.com/owaisnaim" target="_blank" rel="noopener noreferrer" className="text-white hover:underline font-semibold">
               Owais Naim
             </a>.

@@ -11,23 +11,20 @@ import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
-  // Configurable live app URL with production fallback
-  const appUrl = (import.meta as any).env?.VITE_APP_URL || 'https://snooflick.vercel.app';
-
   return (
     <div className="min-h-screen bg-black text-white selection:bg-[#FF4500]/30 selection:text-white">
-      <Navbar appUrl={appUrl} />
+      <Navbar />
       <main>
-        <Hero appUrl={appUrl} />
+        <Hero />
         <MetricsBar />
         <BentoFeatures />
         <GestureShowcase />
         <ComparisonTable />
-        <InstallHub appUrl={appUrl} />
+        <InstallHub />
         <TechSpecs />
         <FAQ />
       </main>
-      <Footer appUrl={appUrl} />
+      <Footer />
     </div>
   );
 };
