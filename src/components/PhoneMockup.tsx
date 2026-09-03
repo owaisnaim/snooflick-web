@@ -64,7 +64,7 @@ const CLIPS: VideoClip[] = [
 export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => {
   const [currentClipIndex, setCurrentClipIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true); // Default muted for browser autoplay compliance
+  const [isMuted, setIsMuted] = useState(true);
   const [is2xSpeed, setIs2xSpeed] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(CLIPS[0].likes);
@@ -78,7 +78,6 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
 
   const currentClip = CLIPS[currentClipIndex];
 
-  // Sync like count when clip changes
   useEffect(() => {
     setLikeCount(currentClip.likes);
     setIsLiked(false);
@@ -89,21 +88,14 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
     }
   }, [currentClipIndex]);
 
-  // Handle external keyboard triggers (from desktop keyboard HUD)
   useEffect(() => {
     if (!externalTrigger) return;
     const { action } = externalTrigger;
-    if (action === 'togglePlay') {
-      togglePlay();
-    } else if (action === 'nextClip') {
-      nextClip();
-    } else if (action === 'prevClip') {
-      prevClip();
-    } else if (action === 'toggleMute') {
-      toggleMute();
-    } else if (action === 'speedHold') {
-      trigger2XSpeedBurst();
-    }
+    if (action === 'togglePlay') togglePlay();
+    else if (action === 'nextClip') nextClip();
+    else if (action === 'prevClip') prevClip();
+    else if (action === 'toggleMute') toggleMute();
+    else if (action === 'speedHold') trigger2XSpeedBurst();
   }, [externalTrigger]);
 
   const showToast = (msg: string) => {
@@ -134,15 +126,12 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
 
   const nextClip = () => {
     setCurrentClipIndex((prev) => (prev + 1) % CLIPS.length);
-    showToast(`Next: ${CLIPS[(currentClipIndex + 1) % CLIPS.length].subreddit}`);
   };
 
   const prevClip = () => {
     setCurrentClipIndex((prev) => (prev - 1 + CLIPS.length) % CLIPS.length);
-    showToast(`Prev: ${CLIPS[(currentClipIndex - 1 + CLIPS.length) % CLIPS.length].subreddit}`);
   };
 
-  // Hold-to-2X Speed Logic
   const startHold2X = () => {
     holdTimerRef.current = window.setTimeout(() => {
       setIs2xSpeed(true);
@@ -165,7 +154,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
   const trigger2XSpeedBurst = () => {
     setIs2xSpeed(true);
     if (videoRef.current) videoRef.current.playbackRate = 2.0;
-    showToast('2.0X Fast Forward');
+    showToast('2.0X Speed');
     setTimeout(() => {
       setIs2xSpeed(false);
       if (videoRef.current) videoRef.current.playbackRate = 1.0;
@@ -180,7 +169,6 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
     }
     setShowHeartBurst(true);
     setTimeout(() => setShowHeartBurst(false), 800);
-    if (navigator.vibrate) navigator.vibrate(25);
   };
 
   const handleTimeUpdate = () => {
@@ -192,31 +180,28 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
   return (
     <div className="relative mx-auto flex items-center justify-center select-none">
       
-      {/* Titanium iPhone 16 Chassis */}
-      <div className="relative w-[320px] sm:w-[350px] h-[670px] sm:h-[700px] rounded-[52px] bg-black p-3.5 phone-bezel z-10 overflow-hidden">
+      {/* Minimalist Phone Chassis (No Glow Shadows) */}
+      <div className="relative w-[310px] sm:w-[340px] h-[640px] sm:h-[670px] rounded-[48px] bg-black p-3 phone-bezel z-10 overflow-hidden">
         
-        {/* Dynamic Island with Sound Waveform & 60 FPS Badge */}
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-full z-40 flex items-center justify-between px-3 border border-white/10 shadow-lg">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#111] border border-white/20"></div>
-          
-          {/* Audio Visualizer Equalizer in Dynamic Island */}
+        {/* Dynamic Island */}
+        <div className="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-40 flex items-center justify-between px-3 border border-zinc-800">
+          <div className="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-800"></div>
           <div className="flex items-center gap-1">
-            <div className="flex items-center gap-0.5 h-3">
-              <span className={`w-0.5 bg-emerald-400 rounded-full ${!isMuted && isPlaying ? 'eq-bar-1' : 'h-1'}`}></span>
-              <span className={`w-0.5 bg-emerald-400 rounded-full ${!isMuted && isPlaying ? 'eq-bar-2' : 'h-2'}`}></span>
-              <span className={`w-0.5 bg-emerald-400 rounded-full ${!isMuted && isPlaying ? 'eq-bar-3' : 'h-1'}`}></span>
-              <span className={`w-0.5 bg-emerald-400 rounded-full ${!isMuted && isPlaying ? 'eq-bar-4' : 'h-1.5'}`}></span>
+            <div className="flex items-center gap-0.5 h-2.5">
+              <span className={`w-0.5 bg-white rounded-full ${!isMuted && isPlaying ? 'eq-bar-1' : 'h-1'}`}></span>
+              <span className={`w-0.5 bg-white rounded-full ${!isMuted && isPlaying ? 'eq-bar-2' : 'h-2'}`}></span>
+              <span className={`w-0.5 bg-white rounded-full ${!isMuted && isPlaying ? 'eq-bar-3' : 'h-1'}`}></span>
             </div>
-            <span className="text-[9px] font-mono font-bold text-white/70 ml-1">60FPS</span>
+            <span className="text-[9px] font-mono text-zinc-400 ml-1">60FPS</span>
           </div>
         </div>
 
         {/* Screen Display Container */}
         <div 
-          className="relative w-full h-full rounded-[42px] overflow-hidden bg-black flex flex-col justify-between"
+          className="relative w-full h-full rounded-[38px] overflow-hidden bg-black flex flex-col justify-between"
           onDoubleClick={handleDoubleTap}
         >
-          {/* Real Looping HTML5 Video Element */}
+          {/* Looping HTML5 Video Element */}
           <video
             ref={videoRef}
             src={currentClip.url}
@@ -229,7 +214,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
             onClick={togglePlay}
           />
 
-          {/* Real Touch/Click Hold Zone for 2X Speed (Right Half of Screen) */}
+          {/* Touch/Click Hold Zone for 2X Speed */}
           <div
             className="absolute top-0 right-0 w-1/2 h-full z-20 cursor-pointer"
             onMouseDown={startHold2X}
@@ -237,21 +222,21 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
             onMouseLeave={stopHold2X}
             onTouchStart={startHold2X}
             onTouchEnd={stopHold2X}
-            title="Press and hold right half for 2.0X speed"
+            title="Hold right half for 2.0X speed"
           />
 
-          {/* Subreddit Clip Quick Nav Chevrons (Top Right Inside Screen) */}
-          <div className="absolute right-3 top-20 z-30 flex flex-col gap-1.5">
+          {/* Subreddit Clip Chevrons */}
+          <div className="absolute right-3 top-16 z-30 flex flex-col gap-1.5">
             <button
               onClick={prevClip}
-              className="p-1.5 rounded-full bg-black/50 hover:bg-black/80 text-white/70 hover:text-white border border-white/10 backdrop-blur-md transition-all"
+              className="p-1.5 rounded-full bg-black/70 hover:bg-black text-zinc-400 hover:text-white border border-zinc-800 transition-colors"
               title="Previous Clip (K)"
             >
               <ChevronUp className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={nextClip}
-              className="p-1.5 rounded-full bg-black/50 hover:bg-black/80 text-white/70 hover:text-white border border-white/10 backdrop-blur-md transition-all"
+              className="p-1.5 rounded-full bg-black/70 hover:bg-black text-zinc-400 hover:text-white border border-zinc-800 transition-colors"
               title="Next Clip (J)"
             >
               <ChevronDown className="w-3.5 h-3.5" />
@@ -260,65 +245,54 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
 
           {/* Play/Pause Overlay Indicator */}
           {!isPlaying && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-30 pointer-events-none">
-              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-2xl border border-white/25">
-                <Play className="w-8 h-8 fill-current translate-x-0.5" />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-30 pointer-events-none">
+              <div className="w-14 h-14 rounded-full bg-black/70 border border-zinc-700 flex items-center justify-center text-white">
+                <Play className="w-6 h-6 fill-current translate-x-0.5" />
               </div>
             </div>
           )}
 
-          {/* Double Tap Heart Burst Animation */}
+          {/* Double Tap Heart */}
           {showHeartBurst && (
             <div className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none">
               <div className="animate-heartBurst">
-                <Heart className="w-24 h-24 fill-[#FF3B5C] text-[#FF3B5C] drop-shadow-[0_0_25px_rgba(255,59,92,0.8)]" />
+                <Heart className="w-20 h-20 fill-white text-white" />
               </div>
             </div>
           )}
 
-          {/* Top Floating Glass Dock Inside Phone */}
-          <div className="relative z-30 pt-10 px-4 pb-3 flex items-center justify-between bg-gradient-to-b from-black/85 via-black/40 to-transparent">
+          {/* Top Dock Inside Phone (Solid Black Flat Translucent) */}
+          <div className="relative z-30 pt-8 px-4 pb-2.5 flex items-center justify-between bg-black/80 border-b border-zinc-900/60">
             <div className="flex items-center gap-2">
-              <span className="font-black text-sm tracking-tight text-white">SnooFlick</span>
-              <div className="flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/15 text-white border border-white/15 backdrop-blur-md">
-                <Flame className="w-3 h-3 text-[#FF4500]" />
+              <span className="font-bold text-xs tracking-tight text-white">SnooFlick</span>
+              <div className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800">
+                <Flame className="w-2.5 h-2.5 text-[#FF4500]" />
                 <span>{currentClip.subreddit}</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-1.5">
-              <button 
-                onClick={toggleMute}
-                className="p-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/15 backdrop-blur-md transition-colors"
-                title="Toggle Sound (M)"
-              >
-                {isMuted ? <VolumeX className="w-3.5 h-3.5 text-white/70" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
-              </button>
-            </div>
+            <button 
+              onClick={toggleMute}
+              className="p-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 transition-colors"
+              title="Toggle Sound (M)"
+            >
+              {isMuted ? <VolumeX className="w-3 h-3 text-zinc-500" /> : <Volume2 className="w-3 h-3 text-white" />}
+            </button>
           </div>
 
-          {/* 2.0X Speed HUD Pill Overlay */}
+          {/* 2.0X Speed HUD Pill Overlay (Solid Minimal) */}
           {is2xSpeed && (
-            <div className="absolute top-20 left-1/2 -translate-x-1/2 z-40 px-4 py-1.5 rounded-full border border-amber-500/50 bg-black/80 backdrop-blur-xl shadow-2xl flex items-center gap-2 animate-bounce">
-              <Zap className="w-4 h-4 text-amber-400 fill-current" />
-              <span className="text-xs font-black tracking-wider text-amber-300">2.0X SPEED</span>
-              <div className="flex items-center gap-0.5">
-                <span className="w-1 h-3 bg-amber-400 rounded-full animate-pulse"></span>
-                <span className="w-1 h-4 bg-amber-400 rounded-full animate-pulse [animation-delay:0.1s]"></span>
-                <span className="w-1 h-2 bg-amber-400 rounded-full animate-pulse [animation-delay:0.2s]"></span>
-              </div>
+            <div className="absolute top-16 left-1/2 -translate-x-1/2 z-40 px-3 py-1 rounded-full border border-zinc-700 bg-black text-white flex items-center gap-1.5 shadow-xl">
+              <Zap className="w-3.5 h-3.5 fill-current text-[#FF4500]" />
+              <span className="text-[11px] font-mono font-bold tracking-wider">2.0X SPEED</span>
             </div>
           )}
 
-          {/* Interactive Right Floating Action Column */}
-          <div className="absolute right-3 bottom-24 z-30 flex flex-col items-center gap-3.5">
+          {/* Right Action Column */}
+          <div className="absolute right-3 bottom-20 z-30 flex flex-col items-center gap-3">
             {/* Creator Profile */}
-            <div className="relative group cursor-pointer" onClick={() => showToast(`Creator: ${currentClip.author}`)}>
-              <div className="w-9 h-9 rounded-full p-[1.5px] bg-gradient-to-tr from-[#FF4500] to-[#FF1493]">
-                <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center font-bold text-xs text-white">
-                  {currentClip.author.substring(1, 3).toUpperCase()}
-                </div>
-              </div>
+            <div className="w-8 h-8 rounded-full border border-zinc-700 bg-zinc-900 flex items-center justify-center font-bold text-[10px] text-white cursor-pointer" onClick={() => showToast(`Creator: ${currentClip.author}`)}>
+              {currentClip.author.substring(1, 3).toUpperCase()}
             </div>
 
             {/* Like Button */}
@@ -334,16 +308,16 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
                   setTimeout(() => setShowHeartBurst(false), 800);
                 }
               }}
-              className="flex flex-col items-center group cursor-pointer"
+              className="flex flex-col items-center cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-full apple-glass-pill flex items-center justify-center group-hover:bg-white/20 transition-all">
+              <div className="w-8 h-8 rounded-full bg-black/70 border border-zinc-800 flex items-center justify-center hover:bg-black transition-colors">
                 <Heart 
-                  className={`w-4 h-4 transition-all ${
-                    isLiked ? 'fill-[#FF3B5C] text-[#FF3B5C] scale-110' : 'text-white'
+                  className={`w-3.5 h-3.5 ${
+                    isLiked ? 'fill-white text-white' : 'text-zinc-400'
                   }`} 
                 />
               </div>
-              <span className="text-[10px] font-bold text-white mt-1 shadow-sm">
+              <span className="text-[9px] font-mono text-zinc-400 mt-0.5">
                 {(likeCount / 1000).toFixed(1)}k
               </span>
             </button>
@@ -351,112 +325,92 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
             {/* Comments Button */}
             <button 
               onClick={() => setShowComments(!showComments)}
-              className="flex flex-col items-center group cursor-pointer"
+              className="flex flex-col items-center cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-full apple-glass-pill flex items-center justify-center group-hover:bg-white/20 transition-all">
-                <MessageSquare className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 rounded-full bg-black/70 border border-zinc-800 flex items-center justify-center hover:bg-black transition-colors">
+                <MessageSquare className="w-3.5 h-3.5 text-zinc-400" />
               </div>
-              <span className="text-[10px] font-bold text-white mt-1 shadow-sm">
+              <span className="text-[9px] font-mono text-zinc-400 mt-0.5">
                 {currentClip.comments}
               </span>
             </button>
 
             {/* Share Button */}
             <button 
-              onClick={() => showToast('Post link copied! 📋')}
-              className="flex flex-col items-center group cursor-pointer"
+              onClick={() => showToast('Link copied 📋')}
+              className="flex flex-col items-center cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-full apple-glass-pill flex items-center justify-center group-hover:bg-white/20 transition-all">
-                <Share2 className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 rounded-full bg-black/70 border border-zinc-800 flex items-center justify-center hover:bg-black transition-colors">
+                <Share2 className="w-3.5 h-3.5 text-zinc-400" />
               </div>
-              <span className="text-[10px] font-bold text-white mt-1 shadow-sm">Share</span>
             </button>
           </div>
 
-          {/* Bottom Video Metadata Info */}
-          <div className="relative z-30 px-4 pb-5 pt-10 bg-gradient-to-t from-black via-black/75 to-transparent">
-            <div className="flex items-center gap-1.5 mb-1.5">
-              <span className="font-extrabold text-xs text-white">{currentClip.author}</span>
-              <span className="w-3 h-3 rounded-full bg-blue-500 flex items-center justify-center text-[8px] text-white">✓</span>
-              <span className="text-[10px] text-white/60">• {currentClip.timeAgo}</span>
+          {/* Bottom Video Metadata Info (Solid Flat Translucent Black) */}
+          <div className="relative z-30 px-3.5 pb-4 pt-3 bg-black/85 border-t border-zinc-900/60">
+            <div className="flex items-center gap-1.5 mb-1">
+              <span className="font-bold text-[11px] text-white">{currentClip.author}</span>
+              <span className="text-[9px] text-zinc-500">• {currentClip.timeAgo}</span>
             </div>
-            <p className="text-xs font-medium text-white/90 line-clamp-2 pr-12 leading-relaxed">
+            <p className="text-[11px] text-zinc-300 line-clamp-2 pr-10 leading-snug">
               {currentClip.title}
             </p>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-md border border-emerald-500/30">
-                🔊 DASH Audio Sync
+            <div className="flex items-center gap-1.5 mt-1.5">
+              <span className="text-[9px] font-mono font-semibold text-zinc-300 bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded">
+                DASH Audio
               </span>
-              <span className="text-[10px] font-semibold text-white/60">
+              <span className="text-[9px] text-zinc-500 font-mono">
                 {currentClip.subreddit}
               </span>
             </div>
           </div>
 
-          {/* Bottom Progress Scrubber */}
-          <div className="relative z-40 w-full h-1 bg-white/20 overflow-hidden cursor-pointer group">
+          {/* Bottom Progress Scrubber (Solid White) */}
+          <div className="relative z-40 w-full h-0.5 bg-zinc-800 cursor-pointer">
             <div 
-              className="h-full bg-gradient-to-r from-[#FF4500] to-[#FF1493] transition-all duration-75"
+              className="h-full bg-white transition-all duration-75"
               style={{ width: `${progress}%` }}
             />
           </div>
 
-          {/* In-App Toast Notification */}
+          {/* Toast */}
           {toastMessage && (
-            <div className="absolute top-20 left-1/2 -translate-x-1/2 z-50 px-3.5 py-1.5 rounded-full border border-white/20 bg-black/85 backdrop-blur-xl text-xs font-semibold text-white shadow-2xl animate-fade-in">
+            <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 px-3 py-1 rounded-md border border-zinc-700 bg-zinc-900 text-xs font-medium text-white shadow-xl">
               {toastMessage}
             </div>
           )}
 
-          {/* Instagram-Style Comments Drawer */}
+          {/* Comments Drawer */}
           {showComments && (
-            <div className="absolute inset-x-0 bottom-0 top-24 z-50 bg-zinc-950/95 backdrop-blur-2xl rounded-t-[32px] border-t border-white/15 p-4 flex flex-col justify-between shadow-2xl animate-slide-up">
+            <div className="absolute inset-x-0 bottom-0 top-20 z-50 bg-zinc-950 border-t border-zinc-800 p-4 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="w-10 h-1 bg-white/30 rounded-full mx-auto -mt-1 cursor-grab" />
+                <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+                  <div className="text-xs font-bold text-white">{currentClip.comments} Comments</div>
                   <button 
                     onClick={() => setShowComments(false)}
-                    className="absolute right-4 top-3 text-white/60 hover:text-white p-1"
+                    className="text-zinc-400 hover:text-white p-1"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <div className="text-xs font-extrabold text-white mt-3 mb-3">{currentClip.comments} Comments</div>
                 
-                <div className="space-y-3 pr-1 max-h-[360px] overflow-y-auto no-scrollbar text-xs">
-                  <div className="flex gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
-                      RD
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-bold text-white/90">reddit_scroller</span>
-                        <span className="text-[10px] text-white/40">1h</span>
-                      </div>
-                      <p className="text-white/80 text-[11px] mt-0.5">The synchronized audio on this is so crisp 🔥</p>
-                    </div>
+                <div className="space-y-2.5 pt-3 text-xs">
+                  <div className="p-2 rounded bg-zinc-900/60 border border-zinc-800">
+                    <div className="font-semibold text-zinc-300 text-[10px]">reddit_user_42</div>
+                    <p className="text-zinc-400 text-[11px] mt-0.5">The audio sync on this is flawless.</p>
                   </div>
-
-                  <div className="flex gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
-                      FS
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-bold text-white/90">fast_streamer</span>
-                        <span className="text-[10px] text-white/40">35m</span>
-                      </div>
-                      <p className="text-white/80 text-[11px] mt-0.5">Hold-to-2X is game changing for long clips!</p>
-                    </div>
+                  <div className="p-2 rounded bg-zinc-900/60 border border-zinc-800">
+                    <div className="font-semibold text-zinc-300 text-[10px]">skate_enthusiast</div>
+                    <p className="text-zinc-400 text-[11px] mt-0.5">Hold for 2X speed is so useful for long clips.</p>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-white/10">
+              <div className="pt-2 border-t border-zinc-900">
                 <input 
                   type="text" 
                   placeholder="Add a comment..." 
-                  className="w-full bg-white/10 border border-white/15 rounded-full px-3 py-1.5 text-xs text-white placeholder-white/40 focus:outline-none"
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-white placeholder-zinc-600 focus:outline-none"
                   onClick={(e) => e.stopPropagation()}
                 />
               </div>

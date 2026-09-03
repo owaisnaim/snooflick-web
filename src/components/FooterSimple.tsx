@@ -1,33 +1,33 @@
 import React from 'react';
-import { Github, Heart } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 export const FooterSimple: React.FC = () => {
   return (
-    <footer className="border-t border-white/10 bg-black py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+    <footer className="bg-black py-8 border-t border-zinc-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
         
         {/* Left: Brand & Attribution */}
-        <div className="flex items-center gap-3">
-          <div className="w-6 h-6 rounded-lg overflow-hidden p-[1px] bg-gradient-to-tr from-[#FF4500] to-[#FF1493]">
-            <img src="/logo.png" alt="SnooFlick" className="w-full h-full object-cover rounded-[5px] bg-black" />
+        <div className="flex items-center gap-2.5">
+          <div className="w-5 h-5 rounded overflow-hidden border border-zinc-800 bg-zinc-900">
+            <img src="/logo.png" alt="SnooFlick" className="w-full h-full object-cover" />
           </div>
-          <span className="font-bold text-white">SnooFlick</span>
-          <span className="text-white/30">•</span>
+          <span className="font-bold text-zinc-300">SnooFlick</span>
+          <span>•</span>
           <span>
-            Created with <Heart className="w-3 h-3 text-rose-500 inline fill-current" /> by{' '}
-            <a href="https://github.com/owaisnaim" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white font-medium underline">
+            Created by{' '}
+            <a href="https://github.com/owaisnaim" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white underline">
               Owais Naim
             </a>
           </span>
         </div>
 
         {/* Right: GitHub & License */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           <a
             href="https://github.com/owaisnaim/snooflick"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-1.5"
+            className="hover:text-white transition-colors flex items-center gap-1 text-zinc-400"
           >
             <Github className="w-3.5 h-3.5" />
             <span>GitHub</span>
@@ -36,11 +36,11 @@ export const FooterSimple: React.FC = () => {
             href="https://github.com/owaisnaim/snooflick/blob/main/LICENSE"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
+            className="hover:text-white transition-colors text-zinc-400"
           >
             MIT License
           </a>
-          <span>snooflick.com</span>
+          <span className="text-zinc-600">snooflick.com</span>
         </div>
 
       </div>
