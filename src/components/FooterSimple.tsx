@@ -1,7 +1,21 @@
 import React from 'react';
 import { Github } from 'lucide-react';
 
-export const FooterSimple: React.FC = () => {
+interface FooterSimpleProps {
+  onNavigatePrivacy?: () => void;
+}
+
+export const FooterSimple: React.FC<FooterSimpleProps> = ({ onNavigatePrivacy }) => {
+  const handlePrivacyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onNavigatePrivacy) {
+      onNavigatePrivacy();
+    } else {
+      window.history.pushState(null, '', '/privacy');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
   return (
     <footer className="bg-black py-8 border-t border-zinc-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
@@ -21,8 +35,15 @@ export const FooterSimple: React.FC = () => {
           </span>
         </div>
 
-        {/* Right: GitHub & License */}
+        {/* Right: GitHub, Privacy Policy, License */}
         <div className="flex items-center gap-4">
+          <a
+            href="/privacy"
+            onClick={handlePrivacyClick}
+            className="hover:text-white transition-colors text-zinc-400 underline underline-offset-4"
+          >
+            Privacy Policy
+          </a>
           <a
             href="https://github.com/owaisnaim/snooflick"
             target="_blank"

@@ -5,16 +5,53 @@ import { CommunityMarquee } from './components/CommunityMarquee';
 import { FeaturesSimple } from './components/FeaturesSimple';
 import { InstallSimple } from './components/InstallSimple';
 import { FooterSimple } from './components/FooterSimple';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
 
 export const App: React.FC = () => {
+  const [currentRoute, setCurrentRoute] = useState<'home' | 'privacy'>(() => {
+    return window.location.pathname.startsWith('/privacy') ? 'privacy' : 'home';
+  });
+
   const [externalTrigger, setExternalTrigger] = useState<{ action: string; timestamp: number } | null>(null);
+
+  const navigate = useCallback((path: string) => {
+    if (path === '/privacy') {
+      setCurrentRoute('privacy');
+      window.history.pushState(null, '', '/privacy');
+      document.title = 'SnooFlick — Privacy Policy';
+      window.scrollTo(0, 0);
+    } else {
+      setCurrentRoute('home');
+      window.history.pushState(null, '', '/');
+      document.title = 'SnooFlick — Watch Reddit Like TikTok';
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  // Listen to popstate (back / forward browser navigation)
+  useEffect(() => {
+    const handlePopState = () => {
+      if (window.location.pathname.startsWith('/privacy')) {
+        setCurrentRoute('privacy');
+        document.title = 'SnooFlick — Privacy Policy';
+      } else {
+        setCurrentRoute('home');
+        document.title = 'SnooFlick — Watch Reddit Like TikTok';
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const triggerPhoneAction = useCallback((action: string) => {
     setExternalTrigger({ action, timestamp: Date.now() });
   }, []);
 
-  // Global physical keyboard hotkeys listener
+  // Global physical keyboard hotkeys listener (only on home screen)
   useEffect(() => {
+    if (currentRoute !== 'home') return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
@@ -38,7 +75,11 @@ export const App: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [triggerPhoneAction]);
+  }, [triggerPhoneAction, currentRoute]);
+
+  if (currentRoute === 'privacy') {
+    return <PrivacyPolicy onBack={() => navigate('/')} />;
+  }
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-zinc-800 selection:text-white">
@@ -49,7 +90,7 @@ export const App: React.FC = () => {
         <FeaturesSimple />
         <InstallSimple />
       </main>
-      <FooterSimple />
+      <FooterSimple onNavigatePrivacy={() => navigate('/privacy')} />
     </div>
   );
 };
