@@ -31,7 +31,7 @@ export const Hero: React.FC<HeroProps> = ({ externalTrigger }) => {
 
             {/* Clean Subtitle */}
             <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              A lightning-fast, 60fps vertical stream for live Reddit and RedGIFs content. Synchronized audio, hold-to-2X speed, zero ads, and zero login required.
+              A lightning-fast, 60fps vertical stream for live Reddit and RedGIFs content. Synchronized audio, hold-to-2X speed, and zero ads.
             </p>
 
             {/* Minimalist Solid Actions */}
