@@ -8,9 +8,7 @@ import {
   Play, 
   Zap, 
   Flame, 
-  X, 
-  ChevronUp,
-  ChevronDown
+  X
 } from 'lucide-react';
 
 interface PhoneMockupProps {
@@ -224,24 +222,6 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({ externalTrigger }) => 
             onTouchEnd={stopHold2X}
             title="Hold right half for 2.0X speed"
           />
-
-          {/* Subreddit Clip Chevrons */}
-          <div className="absolute right-3 top-16 z-30 flex flex-col gap-1.5">
-            <button
-              onClick={prevClip}
-              className="p-1.5 rounded-full bg-black/70 hover:bg-black text-zinc-400 hover:text-white border border-zinc-800 transition-colors"
-              title="Previous Clip (K)"
-            >
-              <ChevronUp className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={nextClip}
-              className="p-1.5 rounded-full bg-black/70 hover:bg-black text-zinc-400 hover:text-white border border-zinc-800 transition-colors"
-              title="Next Clip (J)"
-            >
-              <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-          </div>
 
           {/* Play/Pause Overlay Indicator */}
           {!isPlaying && (
