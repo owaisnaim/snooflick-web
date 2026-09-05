@@ -22,17 +22,17 @@ export const FeaturesSimple: React.FC = () => {
     },
     {
       index: '03',
-      title: 'Fixed 3-Slot Virtual DOM',
-      tag: '60 FPS MEMORY',
+      title: '60 FPS Virtual Feed',
+      tag: '60 FPS STREAM',
       icon: Layers,
-      description: 'Recycles exactly 3 physical <video> elements using deterministic modulo arithmetic. Scroll 1,000+ consecutive clips without memory leaks or frame drops.',
+      description: 'Hardware-accelerated vertical snap scrolling with intelligent feed virtualization. Stream thousands of continuous clips with zero memory leaks, stutter, or dropped frames.',
     },
     {
       index: '04',
-      title: 'Zero Login Required',
-      tag: '100% PRIVATE',
+      title: 'Guest Authentication',
+      tag: 'INSTALLED CLIENT',
       icon: KeyRound,
-      description: 'Automated Guest Installed Client OAuth tokens refresh seamlessly in-memory. Zero passwords, zero personal tracking, zero algorithmic ad profiling.',
+      description: 'Automated Guest OAuth tokens rotate seamlessly in-memory every 23 hours. Browse public and NSFW video streams with complete privacy and automated token recovery.',
     },
   ];
 
@@ -142,19 +142,12 @@ export const FeaturesSimple: React.FC = () => {
               <p className="text-sm text-zinc-400 leading-relaxed">{features[2].description}</p>
             </div>
 
-            <div className="mt-8 grid grid-cols-3 gap-2 text-center font-mono text-xs">
-              <div className="p-2.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-zinc-400">
-                <div className="text-zinc-300 font-bold">Slot 0</div>
-                <div className="text-[9px] text-zinc-500 mt-0.5">Previous</div>
+            <div className="mt-8 p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span className="font-mono text-zinc-300">GPU Hardware Layer</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-zinc-800 border border-zinc-700 text-white font-bold">
-                <div>Slot 1</div>
-                <div className="text-[9px] text-zinc-300 mt-0.5">Active</div>
-              </div>
-              <div className="p-2.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-zinc-400">
-                <div className="text-zinc-300 font-bold">Slot 2</div>
-                <div className="text-[9px] text-zinc-500 mt-0.5">Next</div>
-              </div>
+              <span className="font-mono text-[10px] text-zinc-500">60 FPS Smooth</span>
             </div>
           </div>
 
