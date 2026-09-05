@@ -1,14 +1,12 @@
 import React from 'react';
-import { ArrowRight, Github, ShieldCheck, Volume2, Zap } from 'lucide-react';
+import { ArrowRight, Github } from 'lucide-react';
 import { PhoneMockup } from './PhoneMockup';
-import { KeyboardHUD } from './KeyboardHUD';
 
 interface HeroProps {
-  onKeyboardAction: (action: string) => void;
   externalTrigger: { action: string; timestamp: number } | null;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onKeyboardAction, externalTrigger }) => {
+export const Hero: React.FC<HeroProps> = ({ externalTrigger }) => {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 border-b border-zinc-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,16 +31,16 @@ export const Hero: React.FC<HeroProps> = ({ onKeyboardAction, externalTrigger })
 
             {/* Clean Subtitle */}
             <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              A lightning-fast, 60fps vertical stream for live Reddit and RedGIFs content. Synchronized audio, hold-to-2X speed, zero ads, and zero account required.
+              A lightning-fast, 60fps vertical stream for live Reddit and RedGIFs content. Synchronized audio, hold-to-2X speed, zero ads, and zero login required.
             </p>
 
             {/* Minimalist Solid Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-1">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
               <a
                 href="#install"
                 className="w-full sm:w-auto px-6 py-3 rounded-lg bg-white text-black font-bold text-sm flex items-center justify-center gap-2 hover:bg-zinc-200 transition-colors group"
               >
-                <span>Get SnooFlick</span>
+                <span>Launch App</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
 
@@ -55,27 +53,6 @@ export const Hero: React.FC<HeroProps> = ({ onKeyboardAction, externalTrigger })
                 <Github className="w-4 h-4" />
                 <span>View on GitHub</span>
               </a>
-            </div>
-
-            {/* Trust Points */}
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-zinc-400 font-medium">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-zinc-300" />
-                <span>No Login Needed</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Volume2 className="w-4 h-4 text-zinc-300" />
-                <span>Full Synced Audio</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Zap className="w-4 h-4 text-zinc-300" />
-                <span>Hold for 2X Speed</span>
-              </div>
-            </div>
-
-            {/* Desktop Keyboard HUD */}
-            <div className="pt-2 flex justify-center lg:justify-start">
-              <KeyboardHUD onTrigger={onKeyboardAction} />
             </div>
 
           </div>

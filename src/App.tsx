@@ -48,7 +48,7 @@ export const App: React.FC = () => {
     setExternalTrigger({ action, timestamp: Date.now() });
   }, []);
 
-  // Global physical keyboard hotkeys listener (only on home screen)
+  // Global physical keyboard hotkeys listener (runs silently on home view)
   useEffect(() => {
     if (currentRoute !== 'home') return;
 
@@ -85,7 +85,7 @@ export const App: React.FC = () => {
     <div className="min-h-screen bg-black text-white selection:bg-zinc-800 selection:text-white">
       <Navbar />
       <main>
-        <Hero onKeyboardAction={triggerPhoneAction} externalTrigger={externalTrigger} />
+        <Hero externalTrigger={externalTrigger} />
         <CommunityMarquee />
         <FeaturesSimple />
         <InstallSimple />

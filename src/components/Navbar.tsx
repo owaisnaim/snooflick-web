@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, ArrowRight } from 'lucide-react';
+import { Github, ArrowRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,12 +11,6 @@ export const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'Demo', href: '#demo' },
-    { name: 'Install', href: '#install' },
-  ];
 
   return (
     <header
@@ -30,7 +23,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo & Brand (Solid Minimalist) */}
+          {/* Logo & Brand */}
           <a href="#" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 p-0.5 group-hover:border-zinc-700 transition-colors">
               <img
@@ -52,21 +45,8 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 px-3 py-1 rounded-full border border-zinc-800/80 bg-zinc-950/70">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-xs font-medium text-zinc-400 hover:text-white px-3 py-1 rounded-full transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
           {/* Right Actions */}
-          <div className="hidden md:flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5">
             <a
               href="https://github.com/owaisnaim/snooflick"
               target="_blank"
@@ -74,7 +54,7 @@ export const Navbar: React.FC = () => {
               className="flex items-center gap-1.5 text-xs font-medium text-zinc-400 hover:text-white px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 transition-colors"
             >
               <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
+              <span className="hidden sm:inline">GitHub</span>
             </a>
 
             <a
@@ -86,61 +66,8 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
-            <a
-              href="#install"
-              className="text-xs font-bold px-3 py-1.5 rounded-lg bg-white text-black"
-            >
-              Get App
-            </a>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white border border-zinc-800 bg-zinc-950"
-              aria-label="Toggle Menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-
         </div>
       </div>
-
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-black border-t border-zinc-800 mt-3 px-4 py-4 space-y-3">
-          <nav className="flex flex-col space-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-medium text-zinc-300 hover:text-white py-1"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-          <div className="pt-3 border-t border-zinc-900 flex items-center justify-between">
-            <a
-              href="https://github.com/owaisnaim/snooflick"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-lg border border-zinc-800 text-zinc-300"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="#install"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-xs font-bold py-1.5 px-3 rounded-lg bg-white text-black"
-            >
-              Install App
-            </a>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
