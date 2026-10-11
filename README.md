@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 SnooFlick Web — Official App Landing Page
+# 🌐 SnooFlick Web - Official App Landing Page
 
 **The modern, high-converting app landing website for [SnooFlick](https://github.com/owaisnaim/snooflick) — The vertical stream client for live Reddit & RedGIFs videos.**
 
