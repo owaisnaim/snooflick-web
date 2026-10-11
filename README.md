@@ -2,7 +2,7 @@
 
 # 🌐 SnooFlick Web - Official App Landing Page
 
-**The modern, high-converting app landing website for [SnooFlick](https://github.com/owaisnaim/snooflick) — The vertical stream client for live Reddit & RedGIFs videos.**
+**The modern, high-converting app landing website for [SnooFlick](https://github.com/owaisnaim/snooflick) - The vertical stream client for live Reddit & RedGIFs videos.**
 
 [![React](https://img.shields.io/badge/React-18.3-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
